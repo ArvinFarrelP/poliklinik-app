@@ -1,3 +1,73 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        --sidebar-w: 260px;
+    }
+
+    * {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+        @apply bg-[#f1f5f9];
+    }
+}
+
+@layer components {
+    .brand-serif {
+        font-family: 'Instrument Serif', serif;
+    }
+
+    /* LAYOUT */
+    .app-wrapper {
+        @apply flex min-h-screen;
+    }
+
+    /* SIDEBAR */
+    .sidebar-fixed {
+        width: var(--sidebar-w);
+        @apply h-screen sticky top-0 shrink-0 z-40 overflow-hidden;
+        background: linear-gradient(160deg, #1e2d6b 0%, #2d4499 60%, #1a2d7a 100%);
+        box-shadow: 4px 0 24px rgba(30, 45, 107, 0.35);
+        transition: all .3s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    /* MAIN */
+    .main-content {
+        @apply flex-1 flex flex-col min-h-screen min-w-0;
+    }
+
+    /* CONTENT SCROLL */
+    .main-scroll {
+        @apply flex-1 p-[28px];
+    }
+
+    /* MOBILE */
+    @media(max-width:1024px) {
+        .sidebar-fixed {
+            @apply fixed left-0 -translate-x-full;
+        }
+
+        .sidebar-fixed.open {
+            @apply translate-x-0;
+        }
+    }
+
+    /* OVERLAY */
+    .sidebar-overlay {
+        @apply hidden fixed inset-0 bg-black/45 z-[39] backdrop-blur-[2px];
+    }
+
+    /* BUTTONS */
+    .btn-primary-gradient {
+        @apply flex items-center justify-center gap-2 w-full p-[13px] text-white rounded-[10px] text-[0.9rem] font-bold transition-all duration-150 border-none cursor-pointer;
+        background: linear-gradient(135deg, #1e2d6b, #2d4499);
+    }
+
+    .btn-primary-gradient:hover {
+        background: linear-gradient(135deg, #162156, #1e2d6b);
+    }
+}
