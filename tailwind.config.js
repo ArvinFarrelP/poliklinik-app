@@ -17,5 +17,5 @@ export default {
             },
         },
     },
-    plugins: [],
+    plugins: [daisyui],  // <== INI YANG KURANG!
 };
