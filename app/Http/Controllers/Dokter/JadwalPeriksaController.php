@@ -12,8 +12,11 @@ class JadwalPeriksaController extends Controller
 {
     public function index(){
         $dokter = Auth::user();
-        $jadwalPeriksa = JadwalPeriksa::where('id_dokter', $dokter->id)->orderBy('hari')->get();
-        return view('dokter.jadwal-periksa.index', compact('jadwalPeriksa'));
+$jadwalPeriksas = JadwalPeriksa::where('id_dokter', $dokter->id)
+    ->orderBy('hari')
+    ->get();
+
+return view('dokter.jadwal-periksa.index', compact('jadwalPeriksas'));
     }
 
     public function create(){

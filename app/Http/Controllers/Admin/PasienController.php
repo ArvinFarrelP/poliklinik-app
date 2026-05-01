@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\Hash;
 
 class PasienController extends Controller
 {
-    public function index()
-    {
-        $pasiens = User::where('role', 'pasien')->with('poli')->get();
-        return view('admin.pasien.index', compact('pasiens'));
-    }
+public function index()
+{
+    $pasiens = User::where('role', 'pasien')->get(); // poli ga perlu
+    return view('pasien.index', compact('pasiens'));
+}
 
-    public function create()
-    {
-        return view('admin.pasien.create');
-    }
+public function create()
+{
+    return view('pasien.create');
+}
 
     public function store(Request $request)
     {
