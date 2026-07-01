@@ -55,7 +55,7 @@
                             </td>
 
                             <td class="px-6 py-4 text-right">
-                                @if ($dp->periksas->isNotEmpty())
+                                @if ($dp->periksa)
                                 <span
                                     class="badge bg-green-100 text-green-700 border border-green-200 rounded-lg px-3 py-1 text-xs font-semibold">
                                     <i class="fas fa-circle-check mr-1"></i>Sudah Diperiksa

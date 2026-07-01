@@ -28,6 +28,7 @@
                             <th class="px-6 py-4">Nama Obat</th>
                             <th class="px-6 py-4">Kemasan</th>
                             <th class="px-6 py-4">Harga</th>
+                            <th class="px-6 py-4">Stok</th>
                             <th class="px-6 py-4 text-right">Aksi</th>
                         </tr>
                     </thead>
@@ -43,7 +44,7 @@
 
                             <td class="px-6 py-4">
                                 <span class="inline-block px-3 py-1 text-xs font-semibold
-                                             rounded-full bg-green-100 text-green-600">
+                                                 rounded-full bg-green-100 text-green-600">
                                     {{ $obat->kemasan ?? '-' }}
                                 </span>
                             </td>
@@ -52,14 +53,31 @@
                                 Rp {{ number_format($obat->harga, 0, ',', '.') }}
                             </td>
 
+                            <td class="px-6 py-4">
+                                @if ($obat->stok <= 0) <span
+                                    class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-600">
+                                    Habis
+                                    </span>
+                                    @elseif ($obat->stok <= 10) <span
+                                        class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-700">
+                                        {{ $obat->stok }} - Menipis
+                                        </span>
+                                        @else
+                                        <span
+                                            class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-600">
+                                            {{ $obat->stok }}
+                                        </span>
+                                        @endif
+                            </td>
+
                             <td class="px-6 py-4 text-right">
                                 <div class="flex justify-end gap-2">
 
                                     {{-- Edit --}}
                                     <a href="{{ route('obat.edit', $obat->id) }}" class="inline-flex items-center gap-1 px-4 py-2
-                                              bg-amber-500 hover:bg-amber-600
-                                              text-white text-xs font-semibold
-                                              rounded-lg transition">
+                                                  bg-amber-500 hover:bg-amber-600
+                                                  text-white text-xs font-semibold
+                                                  rounded-lg transition">
                                         <i class="fas fa-pen text-xs"></i>
                                         Edit
                                     </a>
@@ -71,9 +89,9 @@
 
                                         <button type="submit"
                                             onclick="return confirm('Yakin ingin menghapus obat ini?')" class="inline-flex items-center gap-1 px-4 py-2
-                                                   bg-red-500 hover:bg-red-600
-                                                   text-white text-xs font-semibold
-                                                   rounded-lg transition">
+                                                       bg-red-500 hover:bg-red-600
+                                                       text-white text-xs font-semibold
+                                                       rounded-lg transition">
                                             <i class="fas fa-trash text-xs"></i>
                                             Hapus
                                         </button>
@@ -85,7 +103,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="4" class="text-center py-12 text-slate-400">
+                            <td colspan="5" class="text-center py-12 text-slate-400">
                                 <i class="fas fa-inbox text-3xl mb-3 block"></i>
                                 Belum ada data obat
                             </td>

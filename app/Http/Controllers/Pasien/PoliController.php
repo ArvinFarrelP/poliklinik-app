@@ -27,7 +27,7 @@ class PoliController extends Controller
     public function submit(Request $request)
     {
         $request->validate([
-            'id_poli' => 'required|exists:polis,id',
+            'id_poli' => 'required|exists:poli,id',
             'id_jadwal' => 'required|exists:jadwal_periksa,id',
             'keluhan' => 'nullable|string',
             'id_pasien' => 'required|exists:users,id',

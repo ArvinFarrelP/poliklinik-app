@@ -9,16 +9,17 @@ use Illuminate\Support\Facades\Hash;
 
 class PasienController extends Controller
 {
-public function index()
-{
-    $pasiens = User::where('role', 'pasien')->get(); // poli ga perlu
-    return view('pasien.index', compact('pasiens'));
-}
+    public function index()
+    {
+        $pasiens = User::where('role', 'pasien')->get();
 
-public function create()
-{
-    return view('pasien.create');
-}
+        return view('pasien.index', compact('pasiens'));
+    }
+
+    public function create()
+    {
+        return view('pasien.create');
+    }
 
     public function store(Request $request)
     {
@@ -27,7 +28,7 @@ public function create()
             'alamat' => 'required|string',
             'no_ktp' => 'required|string|max:16|unique:users,no_ktp',
             'no_hp' => 'required|string|max:15',
-            'email' => 'required|string|email|unique:users,email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6',
         ]);
 
@@ -42,13 +43,13 @@ public function create()
         ]);
 
         return redirect()->route('pasien.index')
-            ->with('message', 'Data Pasien berhasil di Tambah')
+            ->with('message', 'Data Pasien berhasil ditambahkan')
             ->with('type', 'success');
     }
 
     public function edit(User $pasien)
     {
-        return view('admin.pasien.edit', compact('pasien'));
+        return view('pasien.edit', compact('pasien'));
     }
 
     public function update(Request $request, User $pasien)
@@ -58,7 +59,7 @@ public function create()
             'alamat' => 'required|string',
             'no_ktp' => 'required|string|max:16|unique:users,no_ktp,' . $pasien->id,
             'no_hp' => 'required|string|max:15',
-            'email' => 'required|string|email|unique:users,email,' . $pasien->id,
+            'email' => 'required|email|unique:users,email,' . $pasien->id,
             'password' => 'nullable|string|min:6',
         ]);
 
@@ -77,7 +78,7 @@ public function create()
         $pasien->update($updateData);
 
         return redirect()->route('pasien.index')
-            ->with('message', 'Data Pasien Berhasil di Update')
+            ->with('message', 'Data Pasien berhasil diperbarui')
             ->with('type', 'success');
     }
 
@@ -86,7 +87,7 @@ public function create()
         $pasien->delete();
 
         return redirect()->route('pasien.index')
-            ->with('message', 'Data Pasien Berhasil Di Hapus')
+            ->with('message', 'Data Pasien berhasil dihapus')
             ->with('type', 'success');
     }
 }
